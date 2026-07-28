@@ -8,15 +8,15 @@ Module for MagicMirror that displays the snow-forecast.com or mountain-forecast.
 Replicates the snow-forecast table on your magic mirror with minimal processing power as collects the data once then updates at a set interval (recommended 1-3 hours).
 
 **Install**
-...
+```
   npm install cheerio
   cd ~/MagicMirror/modules
   git clone https://github.com/howardctrichards/MMM-SnowForecast
-...
+```
 
 **Config**
 Snow-forecast config, note the baseURL must end in with the forward slash, but not have bot or mid or top as this is done in the module:
-...
+```
 {
 		module: "MMM-SnowForecast",
 		position: "bottom_bar",
@@ -36,7 +36,7 @@ Snow-forecast config, note the baseURL must end in with the forward slash, but n
       },
       elevation: "top",
 		},
-...
+```
 
 Parameter | Values
 --- | ---
@@ -51,7 +51,7 @@ elevation | Default elevation to be shown on startup (top/mid/bot)
 **CSS Styling**
 
 There is some very easy adjustment of this module to be done in the css files. You can scale it with just a few numbers in the header and edit fill colours
-...  
+```
   :root {
     --snow-forecast-column-scale: 2;
     --snow-forecast-row-scale: 2;
@@ -64,10 +64,10 @@ There is some very easy adjustment of this module to be done in the css files. Y
     --snow-forecast-elevation-text-size: 10px;
     --snow-forecast-elevation-vertical-offset: -9px; /*djust this to align the elevation switcher with the top of the table if desired*/
   }
-...
+```
 
 You can change your icons by simply changing the links to these images:
-...
+```
 	/*//////////////////////// ICONS   ///////////////change links below to change icons////////////*/
   /* Clear - day */
   .weather-icon[alt="clear"] {
@@ -87,11 +87,11 @@ You can change your icons by simply changing the links to these images:
   }
   /* Cloud */
   .weather-icon[alt="cloud"] {
-...
+```
 
 You can disable the colour fill for snow, rain and temperatures by simply commenting out the section (delete last asterisk in leading ///// line).
 Temperature:
-...
+```
 /*///////    temperature min/max shading    //////  insert or remove asterisk here to enable or disable temperature colours>>>  */
   
   .forecast-table__row[data-row="temperature-max"] .forecast-table__cell:has(.temp-value--cold.temp-value--1),
@@ -101,13 +101,13 @@ Temperature:
     fill: rgba(82, 0, 82, 1);
     color: #fff;
   }
-...
+```
 
 Snow/rain:
-...
+```
 /*//////////    opacity fill snow    //////////  insert or remove asterisk here to enable or disable snow box fill>>>  */
   .forecast-table__container--snow {
     position: relative;
     overflow: hidden;
   }
-...
+```

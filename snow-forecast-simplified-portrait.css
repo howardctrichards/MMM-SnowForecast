@@ -11,7 +11,7 @@ simple css to just change colours etc. in the header and the logos section
   --snow-forecast-rain-fill: rgba(51, 132.6, 255, 0.7);
   --snow-forecast-snow-fill: rgba(212,17,33, 0.7);
   --snow-forecast-data-row-height: 20px;
-  --snow-forecast-night-filter: hue-rotate(65deg);
+  --snow-forecast-night-filter: invert(40%) sepia(52%) saturate(105%) hue-rotate(205deg) brightness(93%) contrast(77%);
   --snow-forecast-snow-filter: saturate(5);
   --snow-forecast-elevation-text-size: 10px;
 }
@@ -425,7 +425,7 @@ simple css to just change colours etc. in the header and the logos section
   /* Cloud - night */
   .forecast-table__container--border & {
     content: url("icons/windows-11-color/icons8-clouds-100.png");
-    filter: invert(52%) sepia(16%) saturate(2057%) hue-rotate(198deg) brightness(87%) contrast(91%);
+    filter: invert(52%) sepia(16%) saturate(1557%) hue-rotate(198deg) brightness(117%) contrast(91%);
   }
 }
 /* Rain Showers */

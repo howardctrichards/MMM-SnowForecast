@@ -1,6 +1,8 @@
 # MMM-SnowForecast
 Module for MagicMirror that displays the snow-forecast.com or mountain-forecast.com. Could be easily adapted for surf-forecast.com if requested.
 
+Please make sure your updateIntervalHours is as large as is reasonable for you, this module is scraping the data as snow-forecast did not reply to using the official API. So to make sure we don't become a burden on their servers and make them change their website setup which could break this module, please update it as infrequently as possible, mine is set to every 6 hours
+
 **Screenshot**
 <img width="2179" height="826" alt="image" src="https://github.com/user-attachments/assets/83254ef2-668e-4633-a6b2-e93b064b7714" />
 

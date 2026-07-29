@@ -118,12 +118,34 @@ Module.register("MMM-SnowForecast", {
       const elevationLinks = wrapper.querySelectorAll(".forecast-table-elevation-switcher__link");
       elevationLinks.forEach((link) => {
           link.addEventListener("click", (e) => {
-              e.preventDefault();
-              const href = link.getAttribute("href");
-              if (href.endsWith(self.config.mountainElevations.top)) self.currentHTML = self.topHTML;
-              else if (href.endsWith(self.config.mountainElevations.mid)) self.currentHTML = self.midHTML;
-              else if (href.endsWith(self.config.mountainElevations.bot)) self.currentHTML = self.botHTML;
-              self.updateDom();
+                e.preventDefault();
+                const href = link.getAttribute("href");
+
+                console.log("Clicked elevation link:", href);
+                console.log("Top elevation:", self.config.mountainElevations.top);
+                console.log("Mid elevation:", self.config.mountainElevations.mid);
+                console.log("Bot elevation:", self.config.mountainElevations.bot);
+
+                if (href.endsWith(self.config.mountainElevations.top)) {
+                    console.log("Switching to TOP");
+                    self.currentHTML = self.topHTML;
+                }
+                else if (
+                    self.config.mountainElevations.mid &&
+                    href.endsWith(self.config.mountainElevations.mid)
+                ) {
+                    console.log("Switching to MID");
+                    self.currentHTML = self.midHTML;
+                }
+                else if (
+                    self.config.mountainElevations.bot &&
+                    href.endsWith(self.config.mountainElevations.bot)
+                ) {
+                    console.log("Switching to BOT");
+                    self.currentHTML = self.botHTML;
+                }
+
+                self.updateDom();
           });
       });
 

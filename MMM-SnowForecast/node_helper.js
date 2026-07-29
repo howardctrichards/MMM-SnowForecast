@@ -98,7 +98,6 @@ async function getMountainHTML(payload, nodeHelper) {
     const baseURL = payload.baseURL;
     const mountainElevations = payload.mountainElevations;
     const elevationCount = Object.values(payload.mountainElevations).filter(Boolean).length
-    const elevationSwitcherHTML = createElevationSwitcher(baseURL, mountainElevations, elevationCount);
     const siteOrigin = "https://www.mountain-forecast.com";
 
     if (elevationCount === 3) {
@@ -117,8 +116,9 @@ async function getMountainHTML(payload, nodeHelper) {
         botHTML = await rawBot.text();
     }
 
-    function extractTable(html) {
+    function extractTable(html, activeElevation) {
         const $ = cheerio.load(html);
+        const elevationSwitcherHTML = createElevationSwitcher(baseURL, mountainElevations, activeElevation);
 
         const $table = $("#forecast-table");
 
@@ -143,12 +143,12 @@ async function getMountainHTML(payload, nodeHelper) {
         return $table.prop("outerHTML");
     }
 
-    const topTableHTML = extractTable(topHTML);
+    const topTableHTML = extractTable(topHTML, "top");
     let midTableHTML = null;
     if (elevationCount === 3) {
-        midTableHTML = extractTable(midHTML);
+        midTableHTML = extractTable(midHTML, "mid");
     }
-    const botTableHTML = extractTable(botHTML);
+    const botTableHTML = extractTable(botHTML, "bot");
 
     if (elevationCount === 3) {
         nodeHelper.sendSocketNotification(
@@ -170,7 +170,7 @@ async function getMountainHTML(payload, nodeHelper) {
     }
 }
 
-function createElevationSwitcher(baseURL, elevations) {
+function createElevationSwitcher(baseURL, elevations, activeElevation) {
 
     const elevationEntries = Object.entries(elevations)
         .filter(([name, elevation]) => elevation);
@@ -179,7 +179,7 @@ function createElevationSwitcher(baseURL, elevations) {
         ([name, elevation], index) => {
 
             const activeClass =
-                index === 0
+                name === activeElevation
                     ? " forecast-table-elevation-switcher__link--active"
                     : "";
 
@@ -189,35 +189,98 @@ function createElevationSwitcher(baseURL, elevations) {
         }
     ).join("");
 
+    let elevationIcon;
+
+    if (activeElevation === "top") {
+        elevationIcon = `
+            <svg
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 100 100"
+                class="forecast-table-elevation-switcher__elevation-icon"
+                width="34"
+                height="34"
+            >
+                <polygon
+                    fill="#ff5a5a"
+                    points="55 20.6 35 55.7 73.7 55.7 55 20.6"
+                ></polygon>
+
+                <path d="M54.9,23.3l19.1,36.1,19.4,36.6h-37.2l-20.5-38.8,19.3-33.9M55,15l-24,42.2,22.7,42.8h46.3l-22.5-42.5L55,15h0Z"></path>
+
+                <path d="M29.1,53.5l22.5,42.5H6.6l22.5-42.5M29.1,45L0,100h58.2l-29.1-55h0Z"></path>
+
+                <polyline
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2px"
+                    points="41.6 41.7 48 48.1 54.4 41.7 60.9 48.2 67.5 41.6"
+                ></polyline>
+            </svg>
+        `;
+    } else if (activeElevation === "mid") {
+        elevationIcon = `
+            <svg
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 100 100"
+                class="forecast-table-elevation-switcher__elevation-icon"
+                width="34"
+                height="34"
+            >
+                <polygon
+                    fill="#ff5a5a"
+                    points="85.3 77.7 14.6 77.7 27.1 53.2 72.4 53.2 85.3 77.7"
+                ></polygon>
+
+                <path d="M54.9,23.3l19.1,36.1,19.4,36.6h-37.2l-20.5-38.8,19.3-33.9M55,15l-24,42.2,22.7,42.8h46.3l-22.5-42.5L55,15h0Z"></path>
+
+                <path d="M29.1,53.5l22.5,42.5H6.6l22.5-42.5M29.1,45L0,100h58.2l-29.1-55h0Z"></path>
+
+                <polyline
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3px"
+                    points="41.6 41.7 48 48.1 54.4 41.7 60.9 48.2 67.5 41.6"
+                ></polyline>
+            </svg>
+        `;
+    } else if (activeElevation === "bot") {
+        elevationIcon = `
+            <svg
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                version="1.1"
+                viewBox="0 0 100 100"
+                class="forecast-table-elevation-switcher__elevation-icon"
+                width="34"
+                height="34"
+            >
+                <polygon
+                    fill="#ff5a5a"
+                    points="95.5 97.3 4.4 97.3 15.4 76 84.3 76 95.5 97.3"
+                ></polygon>
+
+                <path d="M54.9,23.3l19.1,36.1,19.4,36.6h-37.2l-20.5-38.8,19.3-33.9M55,15l-24,42.2,22.7,42.8h46.3l-22.5-42.5L55,15h0Z"></path>
+
+                <path d="M29.1,53.5l22.5,42.5H6.6l22.5-42.5M29.1,45L0,100h58.2l-29.1-55h0Z"></path>
+
+                <polyline
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3px"
+                    points="41.6 41.7 48 48.1 54.4 41.7 60.9 48.2 67.5 41.6"
+                ></polyline>
+            </svg>
+        `;
+    }
+
     return `
         <div class="not_in_print forecast-table-elevation-switcher">
 
-            <div class="forecast-table-elevation-switcher__label">Elevation<svg
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    version="1.1"
-                    viewBox="0 0 100 100"
-                    class="forecast-table-elevation-switcher__elevation-icon"
-                    width="34"
-                    height="34"
-                >
-                    <polygon
-                        fill="#ff5a5a"
-                        points="55 20.6 35 55.7 73.7 55.7 55 20.6"
-                    ></polygon>
-
-                    <path d="M54.9,23.3l19.1,36.1,19.4,36.6h-37.2l-20.5-38.8,19.3-33.9M55,15l-24,42.2,22.7,42.8h46.3l-22.5-42.5L55,15h0Z"></path>
-
-                    <path d="M29.1,53.5l22.5,42.5H6.6l22.5-42.5M29.1,45L0,100h58.2l-29.1-55h0Z"></path>
-
-                    <polyline
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2px"
-                        points="41.6 41.7 48 48.1 54.4 41.7 60.9 48.2 67.5 41.6"
-                    ></polyline>
-                </svg>
-            </div>
+            <div class="forecast-table-elevation-switcher__label">Elevation${elevationIcon}</div>
 
             <ul class="forecast-table-elevation-switcher__list">
                 ${linksHTML}

@@ -67,7 +67,8 @@ There is some very easy adjustment of this module to be done in the css files. Y
   }
 ```
 
-You can change your icons by simply changing the links to these images:
+<img width="1020" height="231" alt="image" src="https://github.com/user-attachments/assets/2606645d-394b-4dfd-a92d-19636558c157" />
+You can change your icons by simply changing the links to these images. The best way is collate all of the icons in one folder, and then change the content links to your new folder and file names.
 ```
 	/*//////////////////////// ICONS   ///////////////change links below to change icons////////////*/
   /* Clear - day */

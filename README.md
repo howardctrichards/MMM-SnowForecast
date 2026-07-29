@@ -67,10 +67,11 @@ There is some very easy adjustment of this module to be done in the css files. Y
   }
 ```
 
-<img width="1020" height="231" alt="image" src="https://github.com/user-attachments/assets/2606645d-394b-4dfd-a92d-19636558c157" />
+<img width="510" height="115" alt="image" src="https://github.com/user-attachments/assets/2606645d-394b-4dfd-a92d-19636558c157" />
 You can change your icons by simply changing the links to these images. The best way is collate all of the icons in one folder, and then change the content links to your new folder and file names.
+You can also use .gif's although I'd recommend .apng's just as they have transparent backgrounds so look much better on a MagicMirror
 ```
-	/*//////////////////////// ICONS   ///////////////change links below to change icons////////////*/
+/*//////////////////////// ICONS   ///////////////change links below to change icons////////////*/
   /* Clear - day */
   .weather-icon[alt="clear"] {
     content: url("icons/windows-11-color/icons8-sun-100.png");

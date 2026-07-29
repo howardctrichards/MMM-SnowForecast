@@ -5,8 +5,8 @@ simple css to just change colours etc. in the header and the logos section
 ////////////////////////    HEADER    ///////////////////////////////////////////*/
 
 :root {
-  --snow-forecast-column-scale: 2;
-  --snow-forecast-row-scale: 2;
+  --snow-forecast-column-scale: 1.5;
+  --snow-forecast-row-scale: 1.5;
   --snow-forecast-text-scale: 1.5;
   --snow-forecast-rain-fill: rgba(51, 132.6, 255, 0.7);
   --snow-forecast-snow-fill: rgba(212,17,33, 0.7);

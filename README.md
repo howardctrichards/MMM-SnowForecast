@@ -4,7 +4,8 @@ Module for MagicMirror that displays the snow-forecast.com or mountain-forecast.
 Please make sure your updateIntervalHours is as large as is reasonable for you, this module is scraping the data as snow-forecast did not reply to using the official API. So to make sure we don't become a burden on their servers and make them change their website setup which could break this module, please update it as infrequently as possible, mine is set to every 6 hours
 
 **Screenshot**
-<img width="2179" height="826" alt="image" src="https://github.com/user-attachments/assets/83254ef2-668e-4633-a6b2-e93b064b7714" />
+<img width="2250" height="778" alt="image" src="https://github.com/user-attachments/assets/921f3ecc-5b8d-4bb9-a7d2-65cd723a3afa" />
+
 
 **Features**
 Replicates the snow-forecast table on your magic mirror with minimal processing power as collects the data once then updates at a set interval (recommended 1-3 hours).
@@ -17,7 +18,9 @@ Replicates the snow-forecast table on your magic mirror with minimal processing 
 ```
 
 **Config**
-Snow-forecast config, note the baseURL must end in with the forward slash, but not have bot or mid or top as this is done in the module:
+Snow-forecast config, 
+*SNOW*: the baseURL must end in with the forward slash, but not have bot or mid or top and the *mountainElevations section must be deleted.*
+*MOUNTAIN*: must end in forecasts/ and not include the elevation, and you must set the elevations manually in mountainElevations as shown:
 ```
 {
 	module: "MMM-SnowForecast",

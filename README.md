@@ -18,24 +18,25 @@ Replicates the snow-forecast table on your magic mirror with minimal processing 
 Snow-forecast config, note the baseURL must end in with the forward slash, but not have bot or mid or top as this is done in the module:
 ```
 {
-		module: "MMM-SnowForecast",
-		position: "bottom_bar",
-    order: "*",
+	module: "MMM-SnowForecast",
+	position: "bottom_bar",
+	order: "*",
     hiddenOnStartup: false,
     disabled: false,
-		config: {
-      baseURL: "https://www.mountain-forecast.com/peaks/Daisetsu/forecasts/",
-      theme: "simplified-portrait",
-      enabledRows: ["days", "time", "weather", "wind", "snow", "rain", "temperature-max", "temperature-min", "temperature-chill"],
-      updateIntervalHours: 1,
-      forecastType: "mountain",
-      mountainElevations: {
-          top: "2290",
-          mid: "1500",
-          bot: "500",
-      },
-      elevation: "top",
-		},
+	config: {
+	  baseURL: "https://www.mountain-forecast.com/peaks/Daisetsu/forecasts/",
+	  theme: "simplified-portrait",
+	  enabledRows: ["days", "time", "weather", "wind", "snow", "rain", "temperature-max", "temperature-min", "temperature-chill"],
+	  updateIntervalHours: 1,
+	  forecastType: "mountain",
+	  mountainElevations: {
+		  top: "2290",
+		  mid: "1500",
+		  bot: "500",
+	  },
+	  elevation: "top",
+	},
+},
 ```
 
 Parameter | Values
